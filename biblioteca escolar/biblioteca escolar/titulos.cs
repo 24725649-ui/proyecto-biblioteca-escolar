@@ -2,10 +2,9 @@
 
 namespace BibliotecaEscolar
 {
-    
-    // CLASE: Ejemplar
-    // Representa cada copia física individual de un libro.
    
+    // CLASE: Ejemplar
+    
     public class Ejemplar
     {
         public int IdEjemplar { get; set; }
@@ -18,20 +17,19 @@ namespace BibliotecaEscolar
         }
     }
 
-   
+    
     // CLASE: Titulo
-    // Representa una obra en el catálogo de la biblioteca.
-   
+    
     public class Titulo
     {
         public string ISBN { get; set; }
         public string Nombre { get; set; }
         public int PrestamosHistoricos { get; set; }
 
-        // Arreglo dimensionado exactamente a la cantidad de copias (Día 2: sin celdas vacías)
+        // Arreglo dimensionado exactamente a la cantidad de copias
         public Ejemplar[] Ejemplares { get; set; }
 
-        // Constructor principal
+        // Constructor principal 
         public Titulo(string isbn, string nombre, int prestamosHistoricos, int cantidadCopias)
         {
             ISBN = isbn;
@@ -45,6 +43,8 @@ namespace BibliotecaEscolar
                 Ejemplares[i] = new Ejemplar(i + 1, true);
             }
         }
+
+       
 
         // 1. Devuelve cuántos ejemplares están disponibles para préstamo actualmente
         public int ObtenerDisponibles()
@@ -73,9 +73,12 @@ namespace BibliotecaEscolar
             // Si no quedan ejemplares libres
             return false;
         }
-        // 3. Evalúa si este objeto debe ir ANTES que otro en el catálogo ordenado:
+
+       
+
+        // 3. Evalúa si este objeto debe ir ANTES que otro en el catálogo ordenado por préstamos:
         // Criterio 1: Mayor cantidad de préstamos históricos (orden descendente).
-        // Criterio 2: Si hay empate en préstamos, ordena alfabéticamente (A-Z) para garantizar la estabilidad.
+        // Criterio 2: Si hay empate en préstamos, ordena alfabéticamente (A-Z) para garantizar estabilidad.
         public bool DebeIrAntesQue(Titulo otro)
         {
             if (this.PrestamosHistoricos > otro.PrestamosHistoricos)
