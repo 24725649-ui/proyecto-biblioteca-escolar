@@ -2,7 +2,10 @@
 
 namespace BibliotecaEscolar
 {
-    // Representa un ejemplar físico individual
+    
+    // CLASE: Ejemplar
+    // Representa cada copia física individual de un libro.
+   
     public class Ejemplar
     {
         public int IdEjemplar { get; set; }
@@ -15,23 +18,27 @@ namespace BibliotecaEscolar
         }
     }
 
-    // Representa una obra/título en el catálogo
+   
+    // CLASE: Titulo
+    // Representa una obra en el catálogo de la biblioteca.
+   
     public class Titulo
     {
         public string ISBN { get; set; }
         public string Nombre { get; set; }
         public int PrestamosHistoricos { get; set; }
 
-        // Arreglo con la cantidad exacta de ejemplares (sin celdas vacías)
+        // Arreglo dimensionado exactamente a la cantidad de copias (Día 2: sin celdas vacías)
         public Ejemplar[] Ejemplares { get; set; }
 
+        // Constructor principal
         public Titulo(string isbn, string nombre, int prestamosHistoricos, int cantidadCopias)
         {
             ISBN = isbn;
             Nombre = nombre;
             PrestamosHistoricos = prestamosHistoricos;
 
-            // Se reserva memoria ÚNICAMENTE para la cantidad exacta requerida
+            // Reserva de memoria exacta según la cantidad de ejemplares requerida
             Ejemplares = new Ejemplar[cantidadCopias];
             for (int i = 0; i < cantidadCopias; i++)
             {
@@ -39,7 +46,7 @@ namespace BibliotecaEscolar
             }
         }
 
-        // Método auxiliar para obtener disponibles sin celdas nulas
+        // 1. Devuelve cuántos ejemplares están disponibles para préstamo actualmente
         public int ObtenerDisponibles()
         {
             int disponibles = 0;
@@ -49,23 +56,38 @@ namespace BibliotecaEscolar
             }
             return disponibles;
         }
-        // 2. Registro de préstamo: reduce disponibilidad e incrementa préstamos históricos
+
+        // 2. Registra un préstamo: marca un ejemplar disponible como prestado e incrementa el contador histórico
         public bool RegistrarPrestamo()
         {
-            // Buscar el primer ejemplar disponible
             foreach (var ej in Ejemplares)
             {
                 if (ej.Disponible)
                 {
-                    ej.Disponible = false;      // Se marca como prestado
-                    PrestamosHistoricos++;      // Se incrementa el contador histórico
-                    return true;                // Préstamo exitoso
+                    ej.Disponible = false;      // Cambia estado del ejemplar
+                    PrestamosHistoricos++;      // Incrementa historial de préstamos
+                    return true;                // Éxito en la operación
                 }
             }
 
-            // Si no hay ejemplares disponibles
+            // Si no quedan ejemplares libres
+            return false;
+        }
+        // 3. Evalúa si este objeto debe ir ANTES que otro en el catálogo ordenado:
+        // Criterio 1: Mayor cantidad de préstamos históricos (orden descendente).
+        // Criterio 2: Si hay empate en préstamos, ordena alfabéticamente (A-Z) para garantizar la estabilidad.
+        public bool DebeIrAntesQue(Titulo otro)
+        {
+            if (this.PrestamosHistoricos > otro.PrestamosHistoricos)
+            {
+                return true;
+            }
+            else if (this.PrestamosHistoricos == otro.PrestamosHistoricos)
+            {
+                return string.Compare(this.Nombre, otro.Nombre, StringComparison.OrdinalIgnoreCase) < 0;
+            }
+
             return false;
         }
     }
 }
-    
