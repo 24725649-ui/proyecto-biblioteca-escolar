@@ -1,14 +1,14 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\NAVA\\Downloads\\proyecto roberto\\biblioteca escolar\\",
+  "WorkspaceRootPath": "C:\\Users\\NAVA\\Documents\\proyecto roberto\\proyecto-biblioteca-escolar\\biblioteca escolar\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A8DD646D-A0D4-499A-A5F0-D9D363A820CB}|biblioteca escolar\\biblioteca escolar.csproj|c:\\users\\nava\\downloads\\proyecto roberto\\biblioteca escolar\\biblioteca escolar\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A8DD646D-A0D4-499A-A5F0-D9D363A820CB}|biblioteca escolar\\biblioteca escolar.csproj|solutionrelative:biblioteca escolar\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A8DD646D-A0D4-499A-A5F0-D9D363A820CB}|biblioteca escolar\\biblioteca escolar.csproj|C:\\Users\\NAVA\\Documents\\proyecto roberto\\proyecto-biblioteca-escolar\\biblioteca escolar\\biblioteca escolar\\titulos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A8DD646D-A0D4-499A-A5F0-D9D363A820CB}|biblioteca escolar\\biblioteca escolar.csproj|solutionrelative:biblioteca escolar\\titulos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A8DD646D-A0D4-499A-A5F0-D9D363A820CB}|biblioteca escolar\\biblioteca escolar.csproj|c:\\users\\nava\\downloads\\proyecto roberto\\biblioteca escolar\\biblioteca escolar\\titulos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A8DD646D-A0D4-499A-A5F0-D9D363A820CB}|biblioteca escolar\\biblioteca escolar.csproj|solutionrelative:biblioteca escolar\\titulos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A8DD646D-A0D4-499A-A5F0-D9D363A820CB}|biblioteca escolar\\biblioteca escolar.csproj|c:\\users\\nava\\documents\\proyecto roberto\\proyecto-biblioteca-escolar\\biblioteca escolar\\biblioteca escolar\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A8DD646D-A0D4-499A-A5F0-D9D363A820CB}|biblioteca escolar\\biblioteca escolar.csproj|solutionrelative:biblioteca escolar\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,7 +18,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Bookmark",
@@ -26,26 +26,26 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "titulos.cs",
-              "DocumentMoniker": "C:\\Users\\NAVA\\Downloads\\proyecto roberto\\biblioteca escolar\\biblioteca escolar\\titulos.cs",
+              "DocumentMoniker": "C:\\Users\\NAVA\\Documents\\proyecto roberto\\proyecto-biblioteca-escolar\\biblioteca escolar\\biblioteca escolar\\titulos.cs",
               "RelativeDocumentMoniker": "biblioteca escolar\\titulos.cs",
-              "ToolTip": "C:\\Users\\NAVA\\Downloads\\proyecto roberto\\biblioteca escolar\\biblioteca escolar\\titulos.cs",
+              "ToolTip": "C:\\Users\\NAVA\\Documents\\proyecto roberto\\proyecto-biblioteca-escolar\\biblioteca escolar\\biblioteca escolar\\titulos.cs",
               "RelativeToolTip": "biblioteca escolar\\titulos.cs",
-              "ViewState": "AgIAAAgAAAAAAAAAAAA0wDQAAAABAAAAAAAAAA==",
+              "ViewState": "AgIAACkAAAAAAAAAAAAkwEcAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-11-02T22:58:32.172Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\NAVA\\Downloads\\proyecto roberto\\biblioteca escolar\\biblioteca escolar\\Program.cs",
+              "DocumentMoniker": "C:\\Users\\NAVA\\Documents\\proyecto roberto\\proyecto-biblioteca-escolar\\biblioteca escolar\\biblioteca escolar\\Program.cs",
               "RelativeDocumentMoniker": "biblioteca escolar\\Program.cs",
-              "ToolTip": "C:\\Users\\NAVA\\Downloads\\proyecto roberto\\biblioteca escolar\\biblioteca escolar\\Program.cs",
+              "ToolTip": "C:\\Users\\NAVA\\Documents\\proyecto roberto\\proyecto-biblioteca-escolar\\biblioteca escolar\\biblioteca escolar\\Program.cs",
               "RelativeToolTip": "biblioteca escolar\\Program.cs",
-              "ViewState": "AgIAAA4AAAAAAAAAAAAuwDAAAAABAAAAAAAAAA==",
+              "ViewState": "AgIAAAoAAAAAAAAAAAAwwGwAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-11-02T22:54:02.088Z",
               "EditorCaption": ""

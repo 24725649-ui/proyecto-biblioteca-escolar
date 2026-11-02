@@ -49,5 +49,23 @@ namespace BibliotecaEscolar
             }
             return disponibles;
         }
+        // 2. Registro de préstamo: reduce disponibilidad e incrementa préstamos históricos
+        public bool RegistrarPrestamo()
+        {
+            // Buscar el primer ejemplar disponible
+            foreach (var ej in Ejemplares)
+            {
+                if (ej.Disponible)
+                {
+                    ej.Disponible = false;      // Se marca como prestado
+                    PrestamosHistoricos++;      // Se incrementa el contador histórico
+                    return true;                // Préstamo exitoso
+                }
+            }
+
+            // Si no hay ejemplares disponibles
+            return false;
+        }
     }
 }
+    

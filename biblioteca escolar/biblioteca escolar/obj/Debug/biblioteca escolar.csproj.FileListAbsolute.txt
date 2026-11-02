@@ -1,0 +1,7 @@
+C:\Users\NAVA\Documents\proyecto roberto\proyecto-biblioteca-escolar\biblioteca escolar\biblioteca escolar\bin\Debug\biblioteca escolar.exe.config
+C:\Users\NAVA\Documents\proyecto roberto\proyecto-biblioteca-escolar\biblioteca escolar\biblioteca escolar\bin\Debug\biblioteca escolar.exe
+C:\Users\NAVA\Documents\proyecto roberto\proyecto-biblioteca-escolar\biblioteca escolar\biblioteca escolar\bin\Debug\biblioteca escolar.pdb
+C:\Users\NAVA\Documents\proyecto roberto\proyecto-biblioteca-escolar\biblioteca escolar\biblioteca escolar\obj\Debug\biblioteca escolar.csproj.AssemblyReference.cache
+C:\Users\NAVA\Documents\proyecto roberto\proyecto-biblioteca-escolar\biblioteca escolar\biblioteca escolar\obj\Debug\biblioteca escolar.csproj.CoreCompileInputs.cache
+C:\Users\NAVA\Documents\proyecto roberto\proyecto-biblioteca-escolar\biblioteca escolar\biblioteca escolar\obj\Debug\biblioteca escolar.exe
+C:\Users\NAVA\Documents\proyecto roberto\proyecto-biblioteca-escolar\biblioteca escolar\biblioteca escolar\obj\Debug\biblioteca escolar.pdb
