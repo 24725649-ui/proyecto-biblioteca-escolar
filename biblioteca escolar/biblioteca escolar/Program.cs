@@ -7,22 +7,22 @@ namespace BibliotecaEscolar
     {
         static void Main(string[] args)
         {
-            // 1. Cargar catálogo (Día 2)
+            // 1. Cargar catálogo 
             List<Titulo> catalogo = CargarCatalogoInicial();
 
-            // 2. Ordenamiento manual por inserción y verificación de estabilidad (Día 4)
+            // 2. Ordenamiento manual por inserción y verificación de estabilidad
             Console.WriteLine("=== CATÁLOGO ORDENADO POR PRÉSTAMOS ===");
             OrdenarPorInsercionManual(catalogo);
             MostrarCatalogo(catalogo);
             VerificarEstabilidadEmpates(catalogo);
 
-            // 3. Simulación de 3 préstamos (Día 3)
+           
             Console.WriteLine("\n=== SIMULACIÓN DE PRÉSTAMOS ===");
             RealizarPrestamoSimulado(catalogo, "978-0201633610"); // Patrones de Diseno
             RealizarPrestamoSimulado(catalogo, "978-0321125217"); // Refactorizacion
             RealizarPrestamoSimulado(catalogo, "978-0321125217"); // Intento sin stock
 
-            // 4. Búsquedas por Título e ISBN (Día 5)
+          
             Console.WriteLine("\n=== PRUEBAS DE BÚSQUEDA (DÍA 5) ===");
             BuscarPorTituloSecuencial(catalogo, "Codigo Limpio");
             BuscarPorTituloSecuencial(catalogo, "Java para Principiantes");
@@ -59,7 +59,7 @@ namespace BibliotecaEscolar
             for (int i = 1; i < lista.Count; i++)
             {
                 Titulo clave = lista[i];
-                int j = i - 1;
+                int j = i - 1; 
                 while (j >= 0 && !lista[j].DebeIrAntesQue(clave))
                 {
                     lista[j + 1] = lista[j];
@@ -74,7 +74,7 @@ namespace BibliotecaEscolar
             for (int i = 1; i < lista.Count; i++)
             {
                 Titulo clave = lista[i];
-                int j = i - 1;
+                int j = i - 1; // Corregido syntax error
                 while (j >= 0 && string.Compare(lista[j].ISBN, clave.ISBN, StringComparison.OrdinalIgnoreCase) > 0)
                 {
                     lista[j + 1] = lista[j];
@@ -90,10 +90,10 @@ namespace BibliotecaEscolar
             while (izq <= der)
             {
                 comp++;
-                int med = izq + (der - izq) / 2;
+                int med = izq + (der - izq) / 2; // Corregido syntax error
                 int c = string.Compare(catalogoISBN[med].ISBN, isbn, StringComparison.OrdinalIgnoreCase);
                 if (c == 0) { idx = med; break; }
-                if (c < 0) izq = med + 1; else der = med - 1;
+                if (c < 0) izq = med + 1; else der = med - 1; // Corregido syntax error
             }
 
             if (idx != -1)
