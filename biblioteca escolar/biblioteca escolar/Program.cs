@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace BibliotecaEscolar
 {
@@ -7,39 +8,69 @@ namespace BibliotecaEscolar
     {
         static void Main(string[] args)
         {
-            // 1. Cargar catálogo 
             List<Titulo> catalogo = CargarCatalogoInicial();
 
-            // 2. Ordenamiento manual por inserción y verificación de estabilidad
-            Console.WriteLine("=== CATÁLOGO ORDENADO POR PRÉSTAMOS ===");
+            Console.WriteLine("=================================================");
+            Console.WriteLine("  ANÁLISIS Y COMPARACIÓN DE ALGORITMOS");
+            Console.WriteLine("=================================================\n");
+
+            // 1. Demostración de Ordenamiento Por Inserción (Manual)
+            Console.WriteLine("--- 1. ORDENAMIENTO POR INSERCIÓN MANUAL (Por Préstamos) ---");
             OrdenarPorInsercionManual(catalogo);
             MostrarCatalogo(catalogo);
-            VerificarEstabilidadEmpates(catalogo);
 
-           
-            Console.WriteLine("\n=== SIMULACIÓN DE PRÉSTAMOS ===");
-            RealizarPrestamoSimulado(catalogo, "978-0201633610"); // Patrones de Diseno
-            RealizarPrestamoSimulado(catalogo, "978-0321125217"); // Refactorizacion
-            RealizarPrestamoSimulado(catalogo, "978-0321125217"); // Intento sin stock
-
-          
-            Console.WriteLine("\n=== PRUEBAS DE BÚSQUEDA (DÍA 5) ===");
-            BuscarPorTituloSecuencial(catalogo, "Codigo Limpio");
-            BuscarPorTituloSecuencial(catalogo, "Java para Principiantes");
-
-            // Búsqueda binaria requiere copia ordenada por ISBN
+            // 2. Preparar catálogo ordenado por ISBN para las búsquedas binarias
             List<Titulo> catalogoPorISBN = new List<Titulo>(catalogo);
             OrdenarPorISBNManual(catalogoPorISBN);
 
-            BuscarPorISBNBinaria(catalogoPorISBN, "978-0132350884"); // Encontrado
-            BuscarPorISBNBinaria(catalogoPorISBN, "978-9999999999"); // No encontrado
+            // 3. COMPARATIVA: Búsqueda Binaria Manual vs. Búsqueda Binaria Nativa (Array.BinarySearch)
+            Console.WriteLine("\n--- 2. COMPARATIVA DE BÚSQUEDA BINARIA (ISBN) ---");
+            string isbnPrueba = "978-0132350884"; // ISBN de "Codigo Limpio"
 
-            Console.WriteLine("\nPresione cualquier tecla para salir...");
+            // A) Búsqueda Binaria Manual (Tu algoritmo)
+            int compManual;
+            Stopwatch timerManual = Stopwatch.StartNew();
+            int idxManual = BusquedaBinariaPorISBNManual(catalogoPorISBN, isbnPrueba, out compManual);
+            timerManual.Stop();
+
+            Console.WriteLine("[ALGORITMO MANUAL]");
+            Console.WriteLine($"  -> Resultado: {(idxManual != -1 ? "Encontrado ('" + catalogoPorISBN[idxManual].Nombre + "')" : "No encontrado")}");
+            Console.WriteLine($"  -> Comparaciones realizadas: {compManual}");
+            Console.WriteLine($"  -> Tiempo estimado: {timerManual.Elapsed.TotalMilliseconds:F4} ms");
+
+            // B) Búsqueda Binaria Nativa (C# Framework)
+            // Creamos un arreglo de strings con los ISBNs para usar Array.BinarySearch
+            string[] arreglosISBN = new string[catalogoPorISBN.Count];
+            for (int i = 0; i < catalogoPorISBN.Count; i++)
+            {
+                arreglosISBN[i] = catalogoPorISBN[i].ISBN;
+            }
+
+            Stopwatch timerNativo = Stopwatch.StartNew();
+            int idxNativo = Array.BinarySearch(arreglosISBN, isbnPrueba);
+            timerNativo.Stop();
+
+            Console.WriteLine("\n[MÉTODO NATIVO (Array.BinarySearch)]");
+            Console.WriteLine($"  -> Resultado: {(idxNativo >= 0 ? "Encontrado en índice " + idxNativo : "No encontrado")}");
+            Console.WriteLine($"  -> Tiempo estimado: {timerNativo.Elapsed.TotalMilliseconds:F4} ms");
+
+            // 4. Conclusión Técnica en Consola
+            Console.WriteLine("\n=================================================");
+            Console.WriteLine("                ANÁLISIS DE EFICIENCIA");
+            Console.WriteLine("=================================================");
+            Console.WriteLine("• Búsqueda Binaria (Manual vs Nativa):");
+            Console.WriteLine($"  Ambas técnicas logran una complejidad de O(log n). Para N=8 elementos,");
+            Console.WriteLine($"  el número máximo teórico de comparaciones es log2(8) = 3 pasadas.");
+            Console.WriteLine("• Ordenamiento por Inserción Manual:");
+            Console.WriteLine($"  Complejidad O(n²) en el peor caso y O(n) en el mejor caso.");
+            Console.WriteLine($"  Es un algoritmo ESTABLE ideal para catálogos pequeños.");
+            Console.WriteLine("=================================================");
+
+            Console.WriteLine("\nPresione cualquier tecla para finalizar el proyecto...");
             Console.ReadKey();
         }
 
-        // --- MÉTODOS REQUERIDOS ---
-
+        // --- CÁRGA INICIAL DE DATOS ---
         static List<Titulo> CargarCatalogoInicial()
         {
             List<Titulo> catalogo = new List<Titulo>();
@@ -54,12 +85,13 @@ namespace BibliotecaEscolar
             return catalogo;
         }
 
+        // --- ALGORITMOS DE ORDENAMIENTO MANUAL ---
         static void OrdenarPorInsercionManual(List<Titulo> lista)
         {
             for (int i = 1; i < lista.Count; i++)
             {
                 Titulo clave = lista[i];
-                int j = i - 1; 
+                int j = i - 1;
                 while (j >= 0 && !lista[j].DebeIrAntesQue(clave))
                 {
                     lista[j + 1] = lista[j];
@@ -74,7 +106,7 @@ namespace BibliotecaEscolar
             for (int i = 1; i < lista.Count; i++)
             {
                 Titulo clave = lista[i];
-                int j = i - 1; // Corregido syntax error
+                int j = i - 1;
                 while (j >= 0 && string.Compare(lista[j].ISBN, clave.ISBN, StringComparison.OrdinalIgnoreCase) > 0)
                 {
                     lista[j + 1] = lista[j];
@@ -84,57 +116,43 @@ namespace BibliotecaEscolar
             }
         }
 
-        static void BuscarPorISBNBinaria(List<Titulo> catalogoISBN, string isbn)
+        // --- BÚSQUEDA BINARIA MANUAL CON CONTEO DE COMPARACIONES ---
+        static int BusquedaBinariaPorISBNManual(List<Titulo> lista, string isbnBuscado, out int comparaciones)
         {
-            int izq = 0, der = catalogoISBN.Count - 1, comp = 0, idx = -1;
-            while (izq <= der)
+            int izquierda = 0;
+            int derecha = lista.Count - 1;
+            comparaciones = 0;
+
+            while (izquierda <= derecha)
             {
-                comp++;
-                int med = izq + (der - izq) / 2; // Corregido syntax error
-                int c = string.Compare(catalogoISBN[med].ISBN, isbn, StringComparison.OrdinalIgnoreCase);
-                if (c == 0) { idx = med; break; }
-                if (c < 0) izq = med + 1; else der = med - 1; // Corregido syntax error
+                comparaciones++;
+                int medio = izquierda + (derecha - izquierda) / 2;
+                int comparacion = string.Compare(lista[medio].ISBN, isbnBuscado, StringComparison.OrdinalIgnoreCase);
+
+                if (comparacion == 0)
+                {
+                    return medio; // Encontrado
+                }
+                else if (comparacion < 0)
+                {
+                    izquierda = medio + 1;
+                }
+                else
+                {
+                    derecha = medio - 1;
+                }
             }
 
-            if (idx != -1)
-                Console.WriteLine($"[BINARIA] Existe '{catalogoISBN[idx].Nombre}' | Disponibles: {catalogoISBN[idx].ObtenerDisponibles()} | Comparaciones: {comp}");
-            else
-                Console.WriteLine($"[BINARIA] ISBN '{isbn}' no encontrado | Comparaciones: {comp}");
+            return -1; // No encontrado
         }
 
-        static void BuscarPorTituloSecuencial(List<Titulo> catalogo, string nombre)
-        {
-            Titulo t = catalogo.Find(x => x.Nombre.Equals(nombre, StringComparison.OrdinalIgnoreCase));
-            if (t != null)
-                Console.WriteLine($"[SECUENCIAL] Encontrado: '{t.Nombre}' | ISBN: {t.ISBN} | Disponibles: {t.ObtenerDisponibles()}");
-            else
-                Console.WriteLine($"[SECUENCIAL] Título '{nombre}' no encontrado.");
-        }
-
-        static void RealizarPrestamoSimulado(List<Titulo> catalogo, string isbn)
-        {
-            Titulo t = catalogo.Find(x => x.ISBN == isbn);
-            if (t != null && t.RegistrarPrestamo())
-                Console.WriteLine($"[PRÉSTAMO OK] '{t.Nombre}' | Quedan: {t.ObtenerDisponibles()} | Total préstamos: {t.PrestamosHistoricos}");
-            else
-                Console.WriteLine($"[PRÉSTAMO DENEGADO] Sin stock o no existe libro con ISBN {isbn}");
-        }
-
+        // --- MUESTRA DE CATÁLOGO ---
         static void MostrarCatalogo(List<Titulo> catalogo)
         {
             Console.WriteLine($"{"ISBN",-17} | {"Título",-30} | {"Préstamos",-10} | {"Disponibles"}");
             Console.WriteLine(new string('-', 72));
             foreach (var t in catalogo)
                 Console.WriteLine($"{t.ISBN,-17} | {t.Nombre,-30} | {t.PrestamosHistoricos,-10} | {t.ObtenerDisponibles()}/{t.Ejemplares.Length}");
-        }
-
-        static void VerificarEstabilidadEmpates(List<Titulo> catalogo)
-        {
-            for (int i = 0; i < catalogo.Count - 1; i++)
-            {
-                if (catalogo[i].PrestamosHistoricos == catalogo[i + 1].PrestamosHistoricos)
-                    Console.WriteLine($"[ESTABILIDAD OK] Empate en {catalogo[i].PrestamosHistoricos} préstamos: '{catalogo[i].Nombre}' antes que '{catalogo[i + 1].Nombre}'");
-            }
         }
     }
 }
